@@ -33,9 +33,6 @@ SECRET_KEY = config('SECRET_KEY')
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.feed.apps.FeedConfig',
-    'apps.upload.apps.UploadConfig',
-    'apps.user_profile.apps.UserProfileConfig',
     'bootstrap4',
     'cloudinary',
     'django.contrib.admin',
