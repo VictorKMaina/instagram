@@ -5,6 +5,6 @@
 
 <!-- Bottom of Page -->
 ## External Links
-1. [User Flow Diagram | Draw.io](https://drive.google.com/file/d/1zseN3WeVZvfGzKLWCjGw4uCRK4gxBx0a/view?usp=sharing)
-2. [Wireframe | Figma.com]()
-2. [ER Diagram | Draw.io]()
+1. [User Flow Diagram | Google Drive](https://drive.google.com/file/d/1S_cTUnkkmoTWZXHHpe-mEcUMS8084xsY/view?usp=sharing)
+2. [Wireframe | Figma.com](https://www.figma.com/file/Vyoaw3cvw24Je2YWYRNRLV/Instagram-Clone?node-id=0%3A1)
+2. [ER Diagram | Google Drive](https://drive.google.com/file/d/1wVSowmUe-68efjLQDlviJM2vPng4KTCo/view?usp=sharing)
