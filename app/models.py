@@ -15,16 +15,16 @@ class Image(models.Model):
     """
     Class to define Image instances. Inherits from models.Model.
     """
+    image = CloudinaryField('image')
     image_name = models.CharField(max_length = 255)
     image_caption = models.TextField()
-    image_path = CloudinaryField('image')
-    profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    likes = models.IntegerField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    likes = models.IntegerField(null=True)
 
 class Comment(models.Model):
     """
     Class to define Comment instances. Inherits from models.Model.
     """
-    profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    image_id = models.ForeignKey(Image, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
     comment = models.TextField()
