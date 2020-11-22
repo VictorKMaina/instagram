@@ -35,6 +35,7 @@ SECRET_KEY = config('SECRET_KEY')
 INSTALLED_APPS = [
     'bootstrap4',
     'cloudinary',
+    'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

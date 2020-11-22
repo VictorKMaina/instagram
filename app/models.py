@@ -3,6 +3,14 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 # Create your models here.
+class Profile(models.Model):
+    """
+    Class to define image instances. Inherits from models.Model.
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_photo = CloudinaryField()
+    bio = models.CharField(max_length = 350)
+
 class Image(models.Model):
     """
     Class to define image instances. Inherits from models.Model.
@@ -18,12 +26,5 @@ class Comment(models.Model):
     Class to define image instances. Inherits from models.Model.
     """
     profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
-
-class Profile(models.Model):
-    """
-    Class to define image instances. Inherits from models.Model.
-    """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile_photo = CloudinaryField()
-    bio = models.CharField(max_length = 350)
+    image_id = models.ForeignKey(Image, on_delete=models.CASCADE)
+    comment = models.TextField()
