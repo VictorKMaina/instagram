@@ -1,14 +1,28 @@
-{% extends 'base.html' %}
-{% load bootstrap4 %}
-{% load static %}
+{% extends 'base.html' %} {% load bootstrap4 %}{% load static %}
+{% block styles %} 
+{{ block.super}}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock styles %} {% block content %}
 
-{% block styles %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
-{% endblock styles %}
-
-{% block content %}
-
-
+<div class="vh-100 d-flex align-items-center justify-content-center pb-5">
+    <div>
+        <div class="page-card d-flex flex-column">
+            <div class="m-auto">
+                <img src="{% static 'images/logo.png' %}" alt="logo" />
+            </div>
+            <div>
+                <form action="{% url 'login' %}" method='post'>
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <input type="submit" value="Log In" class="auth" />
+                    <input type="hidden" name='next' value='/'>
+                </form>
+            </div>
+        </div>
+        <div class="page-card text-center mb-5">
+            Don't have an account? <a href="/accounts/sign-up/" class='font-weight-bold'>Sign Up</a>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

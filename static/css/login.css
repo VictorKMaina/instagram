@@ -1,0 +1,54 @@
+body, html {
+    background-color:#fafafa;
+    font-size: 14px;
+}
+
+.page-card {
+    padding: 20px 40px;
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    width: 350px;
+    margin: auto;
+    margin: 10px;
+}
+
+[alt="logo"]{
+    height: 50px;
+    margin: 15px;
+    margin-bottom: 40px;
+}
+
+input.form-control {
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    width: 100%;
+    background-color: #fafafa;
+    height: 36px;
+    padding: 3px 7px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #8e8e8e;
+    margin: 0;
+}
+
+input.form-control:focus {
+    border-color: rgb(133, 133, 133);
+    box-shadow: none;
+}
+
+input.auth, button.auth {
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    background-color: #0095F6;
+    font-weight: 600;
+    color: white;
+    margin-top: 15px;
+    padding: 7px;
+}
