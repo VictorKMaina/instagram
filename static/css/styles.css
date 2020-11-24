@@ -1,0 +1,38 @@
+body, html {
+    background: #FAFAFA;
+    font-size: 14px;
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+div.page-container {
+    width: 100%;
+    margin: auto;
+    max-width: 935px;
+}
+
+nav.navbar {
+    background-color: white;
+    height: 54px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: solid 1px #DBDBDB;
+}
+
+nav img#logo {
+   width: auto;
+   height: 29px; 
+} 
+
+nav div#searchbar {
+    border: solid 1px #dbdbdb;
+    border-radius: 3px;
+    padding: 3px 7px;
+    outline: none;
+    background-color: #FAFAFA;
+    width: 215px;
+    height: 27px;
+}

@@ -1,0 +1,25 @@
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-light">
+  <div class="page-container mx-auto d-flex justify-content-between align-items-center">
+    <a class="navbar-brand mt-1" href="/">
+      <img src="{% static 'images/logo.png' %}" id="logo" alt="">
+    </a>
+
+    <form action="">
+        <div id="searchbar" class="d-flex">
+            <img src="{% static 'images/search.svg' %}" alt="" class="mr-2">
+            <input type="search" name="search" id="search" class="h-100 w-100 bg-transparent" placeholder="Search...">
+        </div>
+    </form>
+
+    <div class="navbar-icons d-flex">
+      <a href="/">
+          <img class="mr-4" src="{% static 'images/home.svg' %}" alt="">
+      </a>
+      <a href="">
+          <img src="{% static 'images/profile.svg' %}" alt="">
+      </a>
+    </div>
+
+  </div>
+</nav>
