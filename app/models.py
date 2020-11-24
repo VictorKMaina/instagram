@@ -24,6 +24,10 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+    def update_bio(self, bio):
+        self.bio = bio
+        self.save_profile()
+
 class Image(models.Model):
     """
     Class to define Image instances. Inherits from models.Model.
@@ -46,6 +50,10 @@ class Image(models.Model):
 
     def delete_image(self):
         self.delete()
+
+    def update_caption(self, image_caption):
+        self.image_caption = image_caption
+        self.save_image()
 
 class Comment(models.Model):
     """

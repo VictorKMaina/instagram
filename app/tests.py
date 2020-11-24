@@ -45,8 +45,14 @@ class ProfileTest(TestCase):
         profiles = Profile.objects.all()
 
         self.assertTrue(len(profiles) == 0)
-
-        
+    
+    def test_update_bio(self):
+        """
+        Test case to check if bio id updates
+        """
+        self.new_profile.save_profile()
+        self.new_profile.update_bio("I'm a capricorn.")
+        self.assertEqual(self.new_profile.bio, "I'm a capricorn.")
         
 
 class ImageTest(TestCase):
@@ -96,6 +102,14 @@ class ImageTest(TestCase):
         images = Image.objects.all()
 
         self.assertTrue(len(images) == 0)
+
+    def test_update_caption(self):
+        """
+        Test case to check if method updates caption of image
+        """
+        self.new_image.save_image()
+        self.new_image.update_caption('This looks very cool.')
+        self.assertEqual(self.new_image.image_caption, "This looks very cool.")
 
 class CommentTest(TestCase):
     """
