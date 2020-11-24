@@ -161,3 +161,5 @@ cloudinary.config(
   api_key = "814948995975825", 
   api_secret = "562WVS3cvzTD_PrlByxy357ac5A" 
 )
+
+ACCOUNT_ACIVATION_DAYS = 7
