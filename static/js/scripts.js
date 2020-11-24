@@ -1,21 +1,18 @@
-$(document).ready(function(){
-    let username = $('input#id_username')
-    let username_label = $('[for="id_username"]')
-    $(username).on("input", function(){
-        if (username.val().length == 0) {
-            username_label.hide()
-        } else {
-            username_label.show()
-        }
-    })
-    
-    let password = $('input#id_password')
-    let password_label = $('[for="id_password"]')
-    $(password).on("input", function(){
-        if (password.val().length == 0) {
-            password_label.hide()
-        } else {
-            password_label.show()
-        }
-    })
-})
+$(document).ready(function () {
+    let labels = $("form label");
+    labels.hide()
+    for (let i = 0; i < labels.length; i++) {
+        let id = $(labels[i]).attr("for");
+        let label = $("[for='" + id + "']")
+        let input = $("#" + id);
+        console.log(label)
+
+        $(input).on("input", function () {
+            if (input.val().length == 0) {
+                label.hide();
+            } else {
+                label.show();
+            }
+        });
+    }
+});

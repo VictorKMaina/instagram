@@ -7,7 +7,7 @@ class Profile(models.Model):
     """
     Class to define Profile instances. Inherits from models.Model.
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_photo = CloudinaryField()
     bio = models.CharField(max_length = 350)
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load bootstrap4 %}{% load static %}
 {% block styles %} 
 {{ block.super}}
-<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+<link rel="stylesheet" href="{% static 'css/auth.css' %}" />
 {% endblock styles %} {% block content %}
 
 <div class="vh-100 d-flex align-items-center justify-content-center pb-5">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="page-card text-center mb-5">
-            Don't have an account? <a href="/accounts/sign-up/" class='font-weight-bold'>Sign Up</a>
+            Don't have an account? <a href="/accounts/register/" class='font-weight-bold'>Sign Up</a>
         </div>
     </div>
 </div>

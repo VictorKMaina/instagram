@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% load bootstrap4 %}{% load static %}
+{% block styles %} 
+{{ block.super}}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}" />
+{% endblock styles %} {% block content %}
+
+<div class="vh-100 d-flex align-items-center justify-content-center pb-5">
+    <div>
+        <div class="page-card d-flex flex-column">
+            <div class="m-auto">
+                <img src="{% static 'images/logo.png' %}" alt="logo" />
+            </div>
+            <div>
+                <form action="/accounts/register/" method='post'>
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <input type="submit" value="Sign Up" class="auth" />
+                    <input type="hidden" name='next' value='/accounts/login/'>
+                </form>
+            </div>
+        </div>
+        <div class="page-card text-center mb-5">
+            Already have an account? <a href="/accounts/login/" class='font-weight-bold'>Log In</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

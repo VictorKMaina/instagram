@@ -52,3 +52,6 @@ input.auth, button.auth {
     margin-top: 15px;
     padding: 7px;
 }
+small.form-text {
+    display: none;
+}
