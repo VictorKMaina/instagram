@@ -23,9 +23,31 @@ class ProfileTest(TestCase):
 
     def test_instance(self):
         """
-        Test class to check if self.new_profile is instance of Profile Class
+        Test case to check if self.new_profile is instance of Profile Class
         """
         self.assertTrue(isinstance(self.new_profile, Profile))
+
+    def test_save_profile(self):
+        """
+        Test case to check if profile object is being saved to database
+        """
+        self.new_profile.save_profile()
+        profiles = Profile.objects.all()
+        self.assertTrue(len(profiles) > 0)
+
+    def test_delete_profile(self):
+        """
+        Test case to check if method deletes profile
+        """
+        self.new_profile.save_profile()
+        self.new_profile.delete_profile()
+
+        profiles = Profile.objects.all()
+
+        self.assertTrue(len(profiles) == 0)
+
+        
+        
 
 class ImageTest(TestCase):
     """
@@ -52,9 +74,28 @@ class ImageTest(TestCase):
 
     def test_instance(self):
         """
-        Test class to check if self.new_image is instance of  Image Class
+        Test case to check if self.new_image is instance of  Image Class
         """
         self.assertTrue(isinstance(self.new_image, Image))
+
+    def test_save_image(self):
+        """
+        Test case to check if image object is being saved to database
+        """
+        self.new_image.save_image()
+        images = Image.objects.all()
+        self.assertTrue(len(images) > 0)
+    
+    def test_delete_image(self):
+        """
+        Test case to check if method deletes image
+        """
+        self.new_image.save_image()
+        self.new_image.delete_image()
+
+        images = Image.objects.all()
+
+        self.assertTrue(len(images) == 0)
 
 class CommentTest(TestCase):
     """
@@ -86,6 +127,25 @@ class CommentTest(TestCase):
 
     def test_instance(self):
         """
-        Test class to check if self.new_comment is instance of Comment Class
+        Test case to check if self.new_comment is instance of Comment Class
         """
         self.assertTrue(isinstance(self.new_comment, Comment))
+
+    def test_save_comment(self):
+        """
+        Test case to check if profile object is being saved to database
+        """
+        self.new_comment.save_comment()
+        comments = Comment.objects.all()
+        self.assertTrue(len(comments) > 0)
+
+    def test_delete_profile(self):
+        """
+        Test case to check if method deletes comment
+        """
+        self.new_comment.save_comment()
+        self.new_comment.delete_comment()
+
+        comments = Comment.objects.all()
+
+        self.assertTrue(len(comments) == 0)
