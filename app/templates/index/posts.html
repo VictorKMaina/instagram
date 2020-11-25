@@ -23,8 +23,12 @@
                 <input type="hidden" id="comment-{{ image.id }}" name="comment" value="{{ image.id }}">
             </form>
         </div>
-        <div class="likes-number">
-            {% if image.likes == 1 %} {{image.likes}} like {% else %} {{image.likes}} likes {% endif %}
+        <div class="likes">
+            {% if image.likes == 1 %}
+            <span id="likes-no-{{image.id}}">{{image.likes}}</span> like
+            {% else %}
+            <span id="likes-no-{{image.id}}">{{image.likes}}</span> likes
+            {% endif %}
         </div>
         <div class="image-caption">
             <span class="font-weight-bold mr-1">{{image.profile.user.username}}</span>

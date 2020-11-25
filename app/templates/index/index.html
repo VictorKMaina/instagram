@@ -15,20 +15,23 @@
                 let like_form = $("form#like-form-{{image.id}}")
                 let like_icon = $('img#like-icon-' + '{{ image.id }}')
                 let like_input = $('input#like-{{ image.id }}')
-                $(like_icon).click(function(){
-                    $(like_form).submit(function(event){
+                $(like_icon).click(function () {
+                    $(like_form).submit(function (event) {
+                        event.preventDefault()
                         $.ajax({
-                            headers:{'X-CSRFToken':token},
-                            type:'POST',
-                            url:'/images/like/',
+                            headers: { 'X-CSRFToken': token },
+                            type: 'POST',
+                            url: '/images/like/',
                             data: {
-                                'image_id':parseInt(like_input.val())
+                                'image_id': parseInt(like_input.val())
                             },
-                            'success': function(){
-                                console.log('Success for image {{image.id}}')
+                            'success': function () {
+                                let likes = parseInt("{{image.likes}}") + 1
+                                let likesOnPage = $('span#likes-no-{{image.id}}')
+                                likesOnPage.html(likes)
+                                like_icon.attr('src', '{% static 'images/like-red.svg' %}');
                             }
                         })
-                        return false
                     })
                     $(like_form).submit()
                 })

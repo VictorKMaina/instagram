@@ -68,5 +68,6 @@ def activate(request, uid, token):
 def add_like(request):
     image_id = request.POST.get('image_id')
     image = Image.find_by_id(image_id)
+    image.add_like()
 
     return HttpResponse("something")
