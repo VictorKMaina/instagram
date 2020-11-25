@@ -89,3 +89,8 @@ class Comment(models.Model):
 
     def delete_comment(self):
         self.delete()
+    
+    @classmethod
+    def find_by_image(cls, image):
+        comments = cls.objects.filter(image = image).order_by('id')
+        return comments

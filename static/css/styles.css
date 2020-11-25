@@ -33,7 +33,7 @@ nav div#searchbar {
     padding: 3px 7px;
     outline: none;
     background-color: #FAFAFA;
-    width: 215px;
+    margin-right: 10px;
     height: 27px;
 }
 
@@ -42,7 +42,7 @@ div.image-post {
     margin-bottom: 50px;
 }
 
-div.main-feed div.card-header {
+div.main-feed div.card-header, div.main-feed div.card-footer {
     height: 54px;
     background-color: white;
     display: flex;
@@ -53,6 +53,20 @@ div.likes {
     font-weight: 600;
     margin-top: 8px;
     margin-bottom: 4px;
+}
+
+p.view-comments {
+    color: #8E8E8E;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.button {
+    padding: 5px 15px;
+    background-color: #0095F6;
+    color: white;
+    font-weight: 600;
+    border-radius: 3px;
 }
 
 @media only screen and (max-width: 992px){

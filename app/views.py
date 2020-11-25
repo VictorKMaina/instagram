@@ -19,7 +19,11 @@ def index(request):
     View function for home page
     """
     images = Image.objects.order_by('id').reverse()
-    ctx = {'images':images}
+    comments = Comment.objects.order_by('id').reverse()
+    current_user = request.user
+    profile = Profile.objects.filter(user = current_user).all().first()
+
+    ctx = {'images':images, 'Comment':Comment, "profile":profile}
     return render(request, 'index/index.html', ctx)
 
 
@@ -66,8 +70,29 @@ def activate(request, uid, token):
         return render(request, 'django_registration/activation_failed.html', ctx)
 
 def add_like(request):
-    image_id = request.POST.get('image_id')
-    image = Image.find_by_id(image_id)
-    image.add_like()
+    try:
+        image_id = request.POST.get('image_id')
+        image = Image.find_by_id(image_id)
+        image.add_like()
 
-    return HttpResponse("something")
+        return HttpResponse("success")
+    except:
+        return HttpResponse("failed")
+
+
+def add_comment(request):
+    if request.method == 'POST':
+        image_id = request.POST.get('image_id')
+        comment_post = request.POST.get('comment')
+        if image_id is not None and comment_post is not None:
+            current_user = request.user
+            profile = Profile.objects.filter(user = current_user).all().first()
+            image = Image.find_by_id(image_id)
+            comment = Comment(profile = profile, image = image, comment = comment_post)
+            comment.save_comment()
+
+            print("COMMENT: ", comment)
+
+            return HttpResponse("success")
+    else:
+        return HttpResponse("failed")

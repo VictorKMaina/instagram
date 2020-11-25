@@ -1,49 +1,69 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
-
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="page-container d-flex justify-content-center">
     <div class="main-feed">
-        {% for image in images %}
-        {% include 'index/posts.html' %}
-        {% block scripts %}
-        {{ block.super }}
-        <script>
+        {% for image in images %} {% include 'index/posts.html' %}
+
+        <script type="text/javascript">
             $(document).ready(function () {
-                let token = "{{csrf_token}}"
-                let like_form = $("form#like-form-{{image.id}}")
-                let like_icon = $('img#like-icon-' + '{{ image.id }}')
-                let like_input = $('input#like-{{ image.id }}')
-                $(like_icon).click(function () {
-                    $(like_form).submit(function (event) {
-                        event.preventDefault()
+                // Variables
+                let token = "{{csrf_token}}";
+                let likeForm = $("form#like-form-{{image.id}}");
+                let likeIcon = $("img#like-icon-" + "{{ image.id }}");
+                let likeInput = $("input#like-{{ image.id }}");
+                let postImage = $('[alt="image-post-{{image.id}}"]');
+
+                // Dblclick on image to submit like
+                $(postImage).dblclick(function () {
+                    likeIcon.click();
+                });
+
+                // Click on like icon to submit like
+                $(likeIcon).click(function () {
+                    $(likeForm).submit(function (event) {
+                        event.preventDefault();
                         $.ajax({
-                            headers: { 'X-CSRFToken': token },
-                            type: 'POST',
-                            url: '/images/like/',
+                            headers: { "X-CSRFToken": token },
+                            type: "POST",
+                            url: "/images/like/",
                             data: {
-                                'image_id': parseInt(like_input.val())
+                                image_id: parseInt(likeInput.val()),
                             },
-                            'success': function () {
-                                let likes = parseInt("{{image.likes}}") + 1
-                                let likesOnPage = $('span#likes-no-{{image.id}}')
-                                likesOnPage.html(likes)
-                                like_icon.attr('src', '{% static 'images/like-red.svg' %}');
-                            }
-                        })
-                    })
-                    $(like_form).submit()
-                })
-            })
+                            success: function () {
+                                let likes = parseInt("{{image.likes}}") + 1;
+                                let likesOnPage = $("span#likes-no-{{image.id}}");
+                                likesOnPage.html(likes);
+                                likeIcon.attr("src", '{% static "images/like-red.svg" %}');
+                            },
+                        });
+                    });
+                    $(likeForm).submit();
+                });
+                let commentForm = $("form#comment-form-{{image.id}}");
+                let commentField = $("form#comment-form-{{image.id}} input#commentField");
+
+                $(commentForm).submit(function (event) {
+                    event.preventDefault();
+                    $.ajax({
+                        headers: { "X-CSRFToken": token },
+                        type: "POST",
+                        url: "/images/comment/",
+                        data: {
+                            image_id: "{{image.id}}",
+                            comment: commentField.val(),
+                        },
+                        success: function () {
+                            let commentDiv = $("div.image-{{image.id}}-comments")
+                            let newDiv = '<div id="comment-{{comment.id}}" class="image-comment"><span id="comment-{{comment.id}}-username" class="font-weight-bold mr-1">{{profile.user.username}}</span><span id="comment-{{comment.id}}-comment">'+ commentField.val() +'</span></div>'
+                            commentDiv.append(newDiv)
+                            console.log("Successful comment posted");
+                        },
+                    });
+                });
+            });
         </script>
-        {% endblock scripts %}
         {% endfor %}
     </div>
     <div class="main-sidebar flex-fill"></div>
 </div>
-{% comment %} Image Modal {% endcomment %}
-<div class="image-modal">
-
-</div>
+<div class="image-modal"></div>
 {% endblock content %}

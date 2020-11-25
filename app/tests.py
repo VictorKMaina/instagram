@@ -190,3 +190,12 @@ class CommentTest(TestCase):
         comments = Comment.objects.all()
 
         self.assertTrue(len(comments) == 0)
+
+    def test_find_by_image(self):
+        """
+        Test case to check if find_by_image will return comments based on image instance
+        """
+        self.new_comment.save_comment()
+        comments = Comment.find_by_image(self.new_image)
+
+        self.assertTrue(len(comments) > 0)
