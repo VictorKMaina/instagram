@@ -1,16 +1,15 @@
-from django.shortcuts import render, redirect
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
 from django.core.exceptions import ObjectDoesNotExist
-from .models import *
-from .forms import SignupForm
-from django.contrib.auth import get_user_model
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from .token import activation_token
-from .email import send_activation_email
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
 from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
+from .email import send_activation_email
+from .forms import SignupForm
+from .models import *
+from .token import activation_token
 
 # Create your views here.
 
@@ -19,7 +18,10 @@ def index(request):
     """
     View function for home page
     """
-    return render(request, 'index/index.html')
+    images = Image.objects.order_by('id').reverse()
+    ctx = {'images':images}
+    return render(request, 'index/index.html', ctx)
+
 
 def signup(request):
     User = get_user_model()

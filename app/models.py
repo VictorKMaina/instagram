@@ -8,11 +8,11 @@ class Profile(models.Model):
     Class to define Profile instances. Inherits from models.Model.
     """
     user = models.OneToOneField(User, primary_key = True, on_delete=models.CASCADE)
-    profile_photo = CloudinaryField()
+    profile_photo = CloudinaryField(default = 'image/upload/v1606300231/gzwpgegxjpsonlkjrviq.svg')
     bio = models.CharField(max_length = 350)
 
     def __str__(self):
-        print("Profile for", self.user.username)
+        return f"Profile for  {self.user.username}"
 
     def save_profile(self):
         """
@@ -20,10 +20,6 @@ class Profile(models.Model):
         """
         self.save()
         print(f'Profile ID {self.user.id} saved.')
-
-    def delete_profile(self):
-        self.delete()
-        self.user.delete()
 
     def update_bio(self, bio):
         self.bio = bio
@@ -37,10 +33,10 @@ class Image(models.Model):
     image_name = models.CharField(max_length = 255)
     image_caption = models.TextField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    likes = models.IntegerField(null=True)
+    likes = models.IntegerField(default = 0)
 
     def __str__(self):
-        print(f'Image {self.image_name} ID {self.id}')
+        return f'Image {self.image_name} ID {self.id}'
 
     def save_image(self):
         """
@@ -65,7 +61,7 @@ class Comment(models.Model):
     comment = models.TextField()
 
     def __str__(self):
-        print(f'Comment ID {self.id}')
+        return f'Comment ID {self.id}'
 
     def save_comment(self):
         """

@@ -1,1 +1,5 @@
-<svg aria-label="More options" class="_8-yf5 " fill="#262626" height="16" viewBox="0 0 48 48" width="16"><circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle></svg>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.66666 9.5C3.49508 9.5 4.16666 8.82843 4.16666 8C4.16666 7.17157 3.49508 6.5 2.66666 6.5C1.83823 6.5 1.16666 7.17157 1.16666 8C1.16666 8.82843 1.83823 9.5 2.66666 9.5Z" fill="#262626"/>
+<path d="M8 9.5C8.82843 9.5 9.5 8.82843 9.5 8C9.5 7.17157 8.82843 6.5 8 6.5C7.17157 6.5 6.5 7.17157 6.5 8C6.5 8.82843 7.17157 9.5 8 9.5Z" fill="#262626"/>
+<path d="M13.3333 9.5C14.1618 9.5 14.8333 8.82843 14.8333 8C14.8333 7.17157 14.1618 6.5 13.3333 6.5C12.5049 6.5 11.8333 7.17157 11.8333 8C11.8333 8.82843 12.5049 9.5 13.3333 9.5Z" fill="#262626"/>
+</svg>

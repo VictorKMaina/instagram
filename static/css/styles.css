@@ -36,3 +36,27 @@ nav div#searchbar {
     width: 215px;
     height: 27px;
 }
+
+div.image-post {
+    max-width: 600px;
+    margin-bottom: 50px;
+}
+
+div.main-feed div.card-header {
+    height: 54px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+div.likes-number {
+    font-weight: 600;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+@media only screen and (max-width: 992px){
+    div.main-sidebar {
+        display: none;
+    }
+}

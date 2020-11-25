@@ -1,5 +1,42 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
+<div class="page-container d-flex justify-content-center">
+    <div class="main-feed">
+        {% for image in images  %}
+        <div class="card image-post">
+            <div class="card-header d-flex justify-content-between">
+                <div>
+                    <img src="{{ image.profile.profile_photo.url }}" alt="">
+                    <span class="font-weight-bold ml-2">{{ image.profile.user.username }}</span>
+                </div>
+                <div>
+                    <img src="{% static 'images/three-dots.svg' %}" alt="">
+                </div>
+            </div>
+            <img src="{{ image.image.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <div class="image-icons">
+                    <img src="{% static 'images/like.svg' %}" alt="" class="mr-3">
+                    <img src="{% static 'images/comment.svg' %}" alt="">
+                </div>
+                <div class="likes-number">
+                {% if image.likes == 1 %}
+                {{image.likes}} like
+                {% else %}
+                {{image.likes}} likes
+                {% endif %}
+                </div>
+                <div class="image-caption">
+                <span class='font-weight-bold mr-1'>{{image.profile.user.username}}</span>
+                <span>{{ image.image_caption }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="main-sidebar flex-fill"></div>
+</div>
 {% endblock content %}
