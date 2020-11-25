@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 from django.core.exceptions import ObjectDoesNotExist
 from .models import *
 from .forms import SignupForm
@@ -8,7 +9,7 @@ from django.contrib.auth import get_user_model
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from .token import activation_token
 from .email import send_activation_email
-from django.utils.encoding import force_bytes
+from django.utils.encoding import force_text
 
 
 # Create your views here.
@@ -21,25 +22,40 @@ def index(request):
     return render(request, 'index/index.html')
 
 def signup(request):
-    User = get_user_model
+    User = get_user_model()
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
             email_address = form.cleaned_data.get('email')
-            try:
-                user = form.save(commit = False)
-                user.is_active = False
-                user.save()
-                send_activation_email(request, user, email_address)
-                return HttpResponse('Please confirm your email address to complete the registration')                
-            except Exception as e:
-                print("Exception: ", e)
+            user = form.save(commit = False)
+            user.is_active = False
+            user.save()
+            send_activation_email(request, user, email_address)
+            return HttpResponseRedirect('/accounts/confirm-email/')               
     else:
         form = SignupForm()
 
     ctx = {'form':form}
     return render(request, 'django_registration/registration_form.html', ctx)
 
-def activate(request, uid64, token):
+def confirm_email(request):
+    return render(request, 'django_registration/registration_complete.html')
+
+def activate(request, uid, token):
+    User = get_user_model()
     try:
-        uid = force_text
+        uid = force_text(urlsafe_base64_decode(uid))
+        user = User.objects.get(pk=uid)
+    except:
+        user = None
+    ctx = {'uid':uid, 'token':token}
+    if user is not None and activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+
+        return HttpResponseRedirect('/', ctx)
+
+        login(request, user)
+    else:
+        return render(request, 'django_registration/activation_failed.html', ctx)

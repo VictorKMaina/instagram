@@ -16,7 +16,7 @@ def send_activation_email(request, user, email_address):
         html_content=render_to_string('django_registration/activate_email.html', {
             'user':user,
             'domain':get_current_site(request).domain,
-            'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+            'uid':urlsafe_base64_encode(force_bytes(user.id)),
             'token':activation_token.make_token(user)
         }))
     

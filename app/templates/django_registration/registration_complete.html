@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% load bootstrap4 %}{% load static %}
+{% block styles %} 
+{{ block.super}}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}" />
+{% endblock styles %} {% block content %}
+
+<div class="vh-100 d-flex align-items-center justify-content-center pb-5">
+    <div>
+        <div class="page-card d-flex flex-column">
+            <div class="m-auto">
+                <img src="{% static 'images/logo.png' %}" alt="logo" />
+            </div>
+            <div>
+            <h4 class='text-center'>Please check your email to confirm your account.</h4>
+            <a href="{% url 'login' %}">
+            <button class='auth mt-5'>Back to Log In</button>
+            </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
