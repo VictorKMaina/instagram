@@ -50,8 +50,11 @@ def activate(request, uid, token):
         user = None
     ctx = {'uid':uid, 'token':token}
     if user is not None and activation_token.check_token(user, token):
+        profile = Profile(user = user, bio = "I'm a leo.")
         user.is_active = True
+        user.profile = profile
         user.save()
+        profile.save_profile()
         login(request, user)
 
         return HttpResponseRedirect('/', ctx)
