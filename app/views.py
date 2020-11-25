@@ -64,3 +64,9 @@ def activate(request, uid, token):
         login(request, user)
     else:
         return render(request, 'django_registration/activation_failed.html', ctx)
+
+def add_like(request):
+    data = request.POST.get('image_id')
+    print("LIKE DATA: ", data)
+
+    return HttpResponse("something")

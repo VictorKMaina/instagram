@@ -21,6 +21,9 @@ class Profile(models.Model):
         self.save()
         print(f'Profile ID {self.user.id} saved.')
 
+    def delete_profile(self):
+        self.delete()
+
     def update_bio(self, bio):
         self.bio = bio
         self.save_profile()
@@ -51,6 +54,17 @@ class Image(models.Model):
     def update_caption(self, image_caption):
         self.image_caption = image_caption
         self.save_image()
+    
+    @classmethod
+    def all_images(cls):
+        images = cls.objects.all()
+        return images
+
+    @classmethod
+    def find_by_id(cls, id):
+        image = cls.objects.filter(id = id).first()
+        return image
+
 
 class Comment(models.Model):
     """

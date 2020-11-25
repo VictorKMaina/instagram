@@ -111,6 +111,24 @@ class ImageTest(TestCase):
         self.new_image.update_caption('This looks very cool.')
         self.assertEqual(self.new_image.image_caption, "This looks very cool.")
 
+    def test_all_images(self):
+        """
+        Test case to check if all_images method returns QuerySet of all images
+        """
+        self.new_image.save_image()
+        images = Image.all_images()
+        self.assertTrue(len(images) > 0)
+
+    def test_find_by_id(self):
+        """
+        Test case to check if find_by_id method returns single instance of image based on id
+        """
+        self.new_image.save_image()
+        image = Image.find_by_id(self.new_image.id)
+
+        self.assertTrue(image != None)
+        self.assertTrue(isinstance(image, Image))
+
 class CommentTest(TestCase):
     """
     Class for testing Comment methods and properties. Inherits from TestCase.

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // Auth interactivity
     let labels = $("form label");
     labels.hide()
     for (let i = 0; i < labels.length; i++) {
@@ -15,4 +16,8 @@ $(document).ready(function () {
             }
         });
     }
+
+    // Index functions
+    
+
 });
