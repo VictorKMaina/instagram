@@ -65,6 +65,9 @@ class Image(models.Model):
         image = cls.objects.filter(id = id).first()
         return image
 
+    def add_like(self):
+        self.likes += 1
+        self.save_image()
 
 class Comment(models.Model):
     """

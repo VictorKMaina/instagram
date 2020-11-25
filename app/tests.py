@@ -129,6 +129,15 @@ class ImageTest(TestCase):
         self.assertTrue(image != None)
         self.assertTrue(isinstance(image, Image))
 
+    def test_add_like(self):
+        """
+        Test case to check if add_like method adds one like to image model
+        """
+        self.new_image.save_image()
+        self.new_image.add_like()
+
+        self.assertEqual(self.new_image.likes, 1)
+
 class CommentTest(TestCase):
     """
     Class for testing Comment methods and properties. Inherits from TestCase.
