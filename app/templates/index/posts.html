@@ -20,8 +20,9 @@
                 <img src="{% static 'images/like.svg' %}" id="like-icon-{{image.id}}" alt="" class="mr-3" />
                 <input type="hidden" id="like-{{ image.id }}" name="like" value="{{ image.id }}">
             </form>
-
+            <a href="{% url 'image' image.id %}">
             <img src="{% static 'images/comment.svg' %}" alt="" id="comment-icon-{{image.id}}" />
+            </a>
         </div>
         <div class="likes">
             {% if image.likes == 1 %}
