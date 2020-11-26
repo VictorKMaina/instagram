@@ -97,6 +97,14 @@ def send_activation_email(request, user, email_address):
         ...
 ```
 
+### Migrations
+
+Now that the `.env` file is ready to use, we need to upgrade our database to correspond with the app's models.
+
+```sh
+python manage.py migrate
+```
+
 ## Usage
 
 The app is now ready to run. 
