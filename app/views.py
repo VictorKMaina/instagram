@@ -21,7 +21,7 @@ def index(request):
     images = Image.objects.order_by('id').reverse()
     comments = Comment.objects.order_by('id').reverse()
     current_user = request.user
-    profile = Profile.objects.filter(user = current_user).all().first()
+    profile = Profile.find_by_user(current_user)
 
     ctx = {'images':images, 'Comment':Comment, "profile":profile}
     return render(request, 'index/index.html', ctx)
@@ -87,7 +87,7 @@ def add_comment(request):
         comment_post = request.POST.get('comment')
         if image_id is not None and comment_post is not None:
             current_user = request.user
-            profile = Profile.objects.filter(user = current_user).all().first()
+            profile = Profile.find_by_user(current_user)
             image = Image.find_by_id(image_id)
             comment = Comment(profile = profile, image = image, comment = comment_post)
             comment.save_comment()
@@ -101,8 +101,15 @@ def add_comment(request):
 @login_required(login_url='/accounts/login/')
 def image(request, image_id):
     current_user = request.user
-    profile = Profile.objects.filter(user = current_user).all().first()
+    profile = Profile.find_by_user(current_user)
     image = Image.find_by_id(image_id)
     comments = Comment.find_by_image(image)
     ctx = {"image":image, "comments":comments, "current_profile":profile}
     return render(request, 'index/single_image.html', ctx)
+
+@login_required(login_url='/accounts/login/')
+def new_image(request):
+    current_user = request.user
+    profile = Profile.find_by_user(current_user)
+    ctx = {"profile":profile}
+    return render(request, 'index/new_image.html', ctx)

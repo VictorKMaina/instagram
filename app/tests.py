@@ -53,6 +53,19 @@ class ProfileTest(TestCase):
         self.new_profile.save_profile()
         self.new_profile.update_bio("I'm a capricorn.")
         self.assertEqual(self.new_profile.bio, "I'm a capricorn.")
+
+    def test_find_by_user(self):
+        """
+        Test case to check if find_by_user class method returns profile object after taking in related user objects
+        """
+        self.new_profile.save_profile()
+        profile = Profile.find_by_user(self.new_user)
+
+        self.assertTrue(isinstance(profile, Profile))
+        self.assertEqual(profile, self.new_profile)
+
+        
+
         
 
 class ImageTest(TestCase):

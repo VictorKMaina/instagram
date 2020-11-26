@@ -9,5 +9,6 @@ urlpatterns = [
     path('accounts/confirm-email/', views.confirm_email, name='confirm_email'),
     path('images/like/', views.add_like, name = 'add_like'),
     path('images/comment/', views.add_comment, name = 'add_comment'),
-    path("image/<int:image_id>", views.image, name="image")
+    path("image/<int:image_id>", views.image, name="image"),
+    path('image/new/', views.new_image, name = "new_image")
 ]

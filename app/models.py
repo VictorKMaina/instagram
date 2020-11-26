@@ -28,6 +28,11 @@ class Profile(models.Model):
         self.bio = bio
         self.save_profile()
 
+    @classmethod
+    def find_by_user(cls, user):
+        profile = cls.objects.filter(user = user).all().first()
+        return profile
+
 class Image(models.Model):
     """
     Class to define Image instances. Inherits from models.Model.
