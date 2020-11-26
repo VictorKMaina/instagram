@@ -8,5 +8,6 @@ urlpatterns = [
     path('activate/<uid>/<token>/', views.activate, name='activation'),
     path('accounts/confirm-email/', views.confirm_email, name='confirm_email'),
     path('images/like/', views.add_like, name = 'add_like'),
-    path('images/comment/', views.add_comment, name = 'add_comment')
+    path('images/comment/', views.add_comment, name = 'add_comment'),
+    path("image/<int:image_id>", views.image, name="image")
 ]

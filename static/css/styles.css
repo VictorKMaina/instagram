@@ -55,7 +55,7 @@ div.likes {
     margin-bottom: 4px;
 }
 
-p.view-comments {
+a.view-comments {
     color: #8E8E8E;
     cursor: pointer;
     margin: 5px 0;

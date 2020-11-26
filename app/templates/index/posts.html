@@ -13,7 +13,7 @@
             <img src="{% static 'images/three-dots.svg' %}" alt="" />
         </div>
     </div>
-    <img src="{{ image.image.url }}" class="card-img-top" alt="image-post-{{image.id}}" />
+    <a href="{% url 'image' image.id %}"><img src="{{ image.image.url }}" class="card-img-top" alt="{{image.image_name}}"/></a>
     <div class="card-body">
         <div class="image-icons d-flex">
             <form id="like-form-{{image.id}}">
@@ -34,8 +34,8 @@
             <span class="font-weight-bold mr-1">{{image.profile.user.username}}</span>
             <span>{{ image.image_caption }}</span>
         </div>
-        <div class="image-{{ image.id }}-comments">
-            <p class="view-comments" id="view-comments-{{image.id}}">View all comments</p>
+        <div id="image-{{ image.id }}-comments">
+            <a href="{% url 'image' image.id %}" class="view-comments" id="view-comments-{{image.id}}">View all comments</a>
 
             {% for comment in Comment|by_image_short:image %}
             <div id="comment-{{comment.id}}" class="image-comment">

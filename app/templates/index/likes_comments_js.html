@@ -1,0 +1,72 @@
+{% load static %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Variables
+        let token = "{{csrf_token}}";
+        let likeForm = $("form#like-form-{{image.id}}");
+        let likeIcon = $("img#like-icon-" + "{{ image.id }}");
+        let likeInput = $("input#like-{{ image.id }}");
+        let postImage = $('[alt="image-post-{{image.id}}"]');
+
+        // Dblclick on image to submit like
+        $(postImage).dblclick(function () {
+            likeIcon.click();
+        });
+
+        // Click on like icon to submit like
+        $(likeIcon).click(function () {
+            $(likeForm).submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    headers: { "X-CSRFToken": token },
+                    type: "POST",
+                    url: "/images/like/",
+                    data: {
+                        image_id: parseInt(likeInput.val()),
+                    },
+                    success: function () {
+                        let likes = parseInt("{{image.likes}}") + 1;
+                        let likesOnPage = $("span#likes-no-{{image.id}}");
+                        likesOnPage.html(likes);
+                        likeIcon.attr("src", '{% static "images/like-red.svg" %}');
+                    },
+                });
+            });
+            $(likeForm).submit();
+        });
+        let commentForm = $("form#comment-form-{{image.id}}");
+        let commentField = $("form#comment-form-{{image.id}} input#commentField");
+
+        $(commentForm).submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                headers: { "X-CSRFToken": token },
+                type: "POST",
+                url: "/images/comment/",
+                data: {
+                    image_id: "{{image.id}}",
+                    comment: commentField.val(),
+                },
+                success: function () {
+                    let commentDiv = $("div#image-{{image.id}}-comments")
+                    let commentDiv2 = $("div.card-body:first")
+                    let newDiv = '<div class="image-comment"><span class="font-weight-bold mr-1">{{profile.user.username}}</span><span>' + commentField.val() + '</span></div>'
+                    let newDiv2 =`
+                        <div class="comment d-flex p-1 mb-3">
+                            <div class="comment-profile mr-3" style="background-image: url({{current_profile.profile_photo.url}});">
+                            </div>
+                            <div>
+                                <span class="font-weight-bold mr-1">{{ current_profile.user.username }}</span>
+                                <span class="text-justify">` + commentField.val() + `</span>
+                            </div>
+                        </div>`;
+                    commentDiv.append(newDiv)
+                    commentDiv2.append(newDiv2)
+                    commentField.val('')
+                    console.log("Successful comment posted");
+                },
+            });
+        });
+    });
+</script>

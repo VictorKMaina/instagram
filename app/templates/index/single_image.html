@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/image.css' %}">
+{% endblock styles %}
+
+{% block content %}
+
+<div class="page-container justify-content-center align-items-center" id="large">
+    <div class="card">
+        <div class="card-header align-items-center justify-content-between">
+            <div>
+                <img src="{{ image.profile.profile_photo.url }}" />
+                <span class="font-weight-bold ml-2">{{ image.profile.user.username }}</span>
+            </div>
+            <div>
+                <img src="{% static 'images/three-dots.svg' %}" alt="" />
+            </div>
+        </div>
+    </div>
+    <div class="post-image d-flex justify-content-center align-items-center">
+        <img class="" src="{{image.image.url}}" alt="image-post-{{image.id}}">
+    </div>
+    <div class="card" id="details">
+        <div class="card-header align-items-center justify-content-between">
+            <div>
+                <img src="{{ image.profile.profile_photo.url }}" />
+                <span class="font-weight-bold ml-2">{{ image.profile.user.username }}</span>
+            </div>
+            <div>
+                <img src="{% static 'images/three-dots.svg' %}" alt="" />
+            </div>
+        </div>
+        <div class="card-body">
+            {% for comment in comments %}
+            <div class="comment d-flex p-1 mb-3">
+                <div class="comment-profile mr-3" style="background-image: url({{comment.profile.profile_photo.url}});">
+                </div>
+                <div>
+                    <span class="font-weight-bold mr-1">{{comment.profile.user.username}}</span>
+                    <span class="text-justify">{{ comment.comment }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="card-footer d-flex align-items-center justify-content-between">
+            <div class="image-icons d-flex">
+                <form id="like-form-{{image.id}}">
+                    <img src="{% static 'images/like.svg' %}" id="like-icon-{{image.id}}" alt="" class="mr-3" />
+                    <input type="hidden" id="like-{{ image.id }}" name="like" value="{{ image.id }}">
+                </form>
+
+                <img src="{% static 'images/comment.svg' %}" alt="" id="comment-icon-{{image.id}}" />
+            </div>
+            <div class="likes">
+                {% if image.likes == 1 %}
+                <span id="likes-no-{{image.id}}">{{image.likes}}</span> like
+                {% else %}
+                <span id="likes-no-{{image.id}}">{{image.likes}}</span> likes
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-footer">
+            <form id="comment-form-{{image.id}}" class="w-100" id="">
+                <div class="d-flex justify-content-end">
+                    <input id="commentField" name="comment" class="flex-fill" type="text" placeholder="Add comment..."
+                        required>
+                    <input class="button" type="submit" value="Post">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% include 'index/likes_comments_js.html' %}
+
+{% endblock content %}

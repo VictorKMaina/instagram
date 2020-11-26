@@ -69,6 +69,7 @@ def activate(request, uid, token):
     else:
         return render(request, 'django_registration/activation_failed.html', ctx)
 
+@login_required(login_url='/accounts/login/')
 def add_like(request):
     try:
         image_id = request.POST.get('image_id')
@@ -79,7 +80,7 @@ def add_like(request):
     except:
         return HttpResponse("failed")
 
-
+@login_required(login_url='/accounts/login/')
 def add_comment(request):
     if request.method == 'POST':
         image_id = request.POST.get('image_id')
@@ -96,3 +97,12 @@ def add_comment(request):
             return HttpResponse("success")
     else:
         return HttpResponse("failed")
+
+@login_required(login_url='/accounts/login/')
+def image(request, image_id):
+    current_user = request.user
+    profile = Profile.objects.filter(user = current_user).all().first()
+    image = Image.find_by_id(image_id)
+    comments = Comment.find_by_image(image)
+    ctx = {"image":image, "comments":comments, "current_profile":profile}
+    return render(request, 'index/single_image.html', ctx)
