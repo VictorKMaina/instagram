@@ -9,7 +9,7 @@ class SignupForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
-class NewImage(forms.ModelForm):
+class NewImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        fields = ('image', 'image_name', 'image_caption')
+        fields = ['image', 'image_name', 'image_caption']

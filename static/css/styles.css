@@ -62,6 +62,8 @@ a.view-comments {
 }
 
 .button {
+    border: none;
+    outline: none;
     padding: 5px 15px;
     background-color: #0095F6;
     color: white;

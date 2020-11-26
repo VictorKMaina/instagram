@@ -7,7 +7,7 @@ from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .email import send_activation_email
-from .forms import SignupForm
+from .forms import SignupForm, NewImageForm
 from .models import *
 from .token import activation_token
 
@@ -25,7 +25,6 @@ def index(request):
 
     ctx = {'images':images, 'Comment':Comment, "profile":profile}
     return render(request, 'index/index.html', ctx)
-
 
 def signup(request):
     User = get_user_model()
@@ -111,5 +110,18 @@ def image(request, image_id):
 def new_image(request):
     current_user = request.user
     profile = Profile.find_by_user(current_user)
-    ctx = {"profile":profile}
+    print(profile)
+
+    if request.method == 'POST':
+        form = NewImageForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            image = form.save(commit = False)
+            image.profile = profile
+            image.save_image()
+            return redirect('/')               
+    else:
+        form = NewImageForm()
+
+    ctx = {"profile":profile, "form":form}
     return render(request, 'index/new_image.html', ctx)
