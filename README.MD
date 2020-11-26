@@ -1,6 +1,6 @@
 # Instagram Clone
 ### By Victor K. Maina
-## [See it on Heroku](<!-- Heroku link -->)
+## [See it on Heroku](https://instagram-clone-ip.herokuapp.com/)
 ---
 
 <!-- Bottom of Page -->
